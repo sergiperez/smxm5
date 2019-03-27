@@ -1,5 +1,17 @@
 # VTP Vlan Trunking protocol
 
+## Introducció
+- Fer un exercici de vlan. Dos switch amb cinc vlan a cadascú.
+- Preguntar que us ha fet més pal de tot.
+- Explicar concepte de domini.
+- Explicar com crear el server i client.
+  - Ensenyar que si no hi ha client lligat domini no es poden afegir vlan.
+  - Ensenyar que si client està lligat al domini es pot posar id de vlan que es vulgui.
+- Tot des del CLI.
+- Posar exemple amb dos dominis.
+- Explicar el transparent.
+
+
 ## Definició
 Protocol que ens estalvia definir les vlan a tots els nodes.
 Es defineixen en un node (servidor) i la resta de nodes el poden usar (client).
