@@ -2,6 +2,9 @@
 
 ## Introducció
 - Fer un exercici de vlan. Dos switch amb cinc vlan a cadascú.
+
+![Introducció a VTP](https://github.com/sergiperez/smxm5/blob/master/Captura%20de%20pantalla%20de%202019-03-28%2009-28-29.png)
+
 - Preguntar que us ha fet més pal de tot.
 - Explicar concepte de domini.
 - Explicar com crear el server i client.
