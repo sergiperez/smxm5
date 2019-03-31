@@ -1,5 +1,14 @@
 # VTP Vlan Trunking protocol
 
+## Index
+1. [Introducció](https://github.com/sergiperez/smxm5/blob/master/vtp.md#introducci%C3%B3)
+2. [Definició](https://github.com/sergiperez/smxm5/blob/master/vtp.md#definici%C3%B3)
+3. [Glossari](https://github.com/sergiperez/smxm5/blob/master/vtp.md#glossari)
+4. [Configuracions](https://github.com/sergiperez/smxm5/blob/master/vtp.md#configuracions)
+5. [Passes](https://github.com/sergiperez/smxm5/blob/master/vtp.md#pases-per-realitzar-una-configuraci%C3%B3-de-vlan)
+6. [Exemple i configuracions](https://github.com/sergiperez/smxm5/blob/master/vtp.md#exemple-i-comprovacions)
+
+
 ## Introducció
 - Realització del següent repte:
 
