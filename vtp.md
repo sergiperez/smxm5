@@ -39,12 +39,15 @@ switch(config)#vtp domain jda
 ```
 ## Pases per realitzar una configuració de VLAN
 
-1.- Fer topologia
-2.- Posar IP
-3.- Posar mode trunk a les intefícies que connecten 
-switchs
-4.- Triar el switch server.
-5.- Definir les VLAN al server. Des de CLI o visual.
+1. Fer topologia
+2. Posar IP
+3. Posar mode trunk a les intefícies que connecten switchs
+```
+Switch(config)#interface FastEthernet 0/2
+Switch(config-if)#switchport mode trunk
+```
+4. Triar el switch server.
+5. Definir les VLAN al server. Des de CLI o visual.
 ```
 Switch>enable
 Switch#
@@ -53,35 +56,27 @@ Switch(vlan)#vlan 112 name servers
 VLAN 112 added:
     Name: servers
 ```    
-6.- Definir el switch com a server
+6. Definir el switch com a server
 ```
 Switch(config)#vtp mode server
 Device mode already VTP SERVER.
 ```
-7.- Definir el domini
+7. Definir el domini
 ```
 Switch(config)#vtp domain jda
 Changing VTP domain name from null to jda
 ```
-8.- Anar a la resta de switch i definir-los com a clients.
+8. Anar a la resta de switch i definir-los com a clients.
 ```
 Switch(config)#vtp mode client
 Setting device to VTP CLIENT mode.
 Switch(config)#vtp domain jda
 Changing VTP domain name from null to jda
 ```
-9.- Assignar les VLAN als ports
+9. Assignar les VLAN als ports
 ```
 Switch(config)#interface FastEthernet 0/1
 Switch(config-if)#switchport access vlan 11
 ```
-10.- Assignar els enllaços troncals
-Normalment els ports que serveixen per usar switchs.
-```
-Switch(config)#interface FastEthernet 0/2
-Switch(config-if)#switchport mode trunk
-```
-
-
 
 
