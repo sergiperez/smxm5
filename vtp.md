@@ -1,30 +1,22 @@
 # VTP Vlan Trunking protocol
 
 ## Index
-1. [Introducció](https://github.com/sergiperez/smxm5/blob/master/vtp.md#introducci%C3%B3)
-2. [Definició](https://github.com/sergiperez/smxm5/blob/master/vtp.md#definici%C3%B3)
-3. [Glossari](https://github.com/sergiperez/smxm5/blob/master/vtp.md#glossari)
-4. [Configuracions](https://github.com/sergiperez/smxm5/blob/master/vtp.md#configuracions)
-5. [Passes](https://github.com/sergiperez/smxm5/blob/master/vtp.md#pases-per-realitzar-una-configuraci%C3%B3-de-vlan)
-6. [Exemple i configuracions](https://github.com/sergiperez/smxm5/blob/master/vtp.md#exemple-i-comprovacions)
+1. [Definició](https://github.com/sergiperez/smxm5/blob/master/vtp.md#definici%C3%B3)
+2. [Glossari](https://github.com/sergiperez/smxm5/blob/master/vtp.md#glossari)
+3. [Configuracions](https://github.com/sergiperez/smxm5/blob/master/vtp.md#configuracions)
+4. [Passes](https://github.com/sergiperez/smxm5/blob/master/vtp.md#pases-per-realitzar-una-configuraci%C3%B3-de-vlan)
+5. [Exemple i configuracions](https://github.com/sergiperez/smxm5/blob/master/vtp.md#exemple-i-comprovacions)
 
-
-## Introducció
-- Realització del següent repte:
-
-![Introducció a VTP](https://github.com/sergiperez/smxm5/blob/master/Captura%20de%20pantalla%20de%202019-03-28%2009-28-29.png)
-
-- Què us ha costat més? 
 
 ## Definició
-Protocol que ens estalvia definir les vlan a tots els nodes.
-Es defineixen en un node (servidor) i la resta de nodes el poden usar (client).
+Protocol que ens estalvia definir les vlan a tots els switchs.
+Les VLAN es defineixen només en un switch (servidor) i la resta de switchs el poden usar (client).
 
 ## Glossari
-1. **Domini:** nom lògic que identifica tots els nodes d¡una mateixa xarxa. Per exemple tots els alumnes sou del domini BB, us agrupa i teniu mateixos professors i horari.
-2. **Server:** node on es defineix les vlan que usarà tota la xarxa.
-3. **Client:** node que usarà les vlan definides pel server en un domini. No pot definir vlan.
-4. **Transparent:** node que usa les vlan definides pel server, però pot definir de pròpies o renombrar les que li arriben.
+1. **Domini:** nom lògic que identifica tots els switchs d'una mateixa xarxa. Per exemple tots els alumnes sou del domini BB, us agrupa i teniu mateixos professors i horari.
+2. **Server:** switch on es defineix les vlan que usarà tota la xarxa.
+3. **Client:** switch que usarà les vlan definides pel server en un domini. No pot definir vlan.
+4. **Transparent:** switch que usa les vlan definides pel server, però pot definir de pròpies o renombrar les que li arriben.
 
 ## Configuracions
 Totes les configuracions s'han de fer des de comandes. El CLI.
@@ -83,8 +75,13 @@ Changing VTP domain name from null to jda
 Switch(config)#interface FastEthernet 0/1
 Switch(config-if)#switchport access vlan 11
 ```
+10.- Assignar els enllaços troncals
+Normalment els ports que serveixen per usar switchs.
+```
+Switch(config)#interface FastEthernet 0/2
+Switch(config-if)#switchport mode trunk
+```
 
-## Exemple i comprovacions
 
 
 
