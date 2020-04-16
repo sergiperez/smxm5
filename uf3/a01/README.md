@@ -1,15 +1,15 @@
 # Comandes de verificació de connectivitat
 
 ## Index
-1. [ip](https://hackmd.io/AxKvK1WDQ3GUd58_rkAocg#ip)
-2. [ifconfig](https://hackmd.io/AxKvK1WDQ3GUd58_rkAocg#ifconfig)
-3. [ipconfig](https://hackmd.io/AxKvK1WDQ3GUd58_rkAocg#ipconfig)
-4. [ping](https://hackmd.io/AxKvK1WDQ3GUd58_rkAocg#ping)
-5. [arp](https://hackmd.io/AxKvK1WDQ3GUd58_rkAocg#arp)
-6. [arping](https://hackmd.io/AxKvK1WDQ3GUd58_rkAocg#arping)
-7. [nslookup](https://hackmd.io/AxKvK1WDQ3GUd58_rkAocg#nslookup)
-8. [dig](https://hackmd.io/AxKvK1WDQ3GUd58_rkAocg#dig)
-9. [host](https://hackmd.io/AxKvK1WDQ3GUd58_rkAocg#host)
+1. [ip](#ip)
+2. [ifconfig](#ifconfig)
+3. [ipconfig](#ipconfig)
+4. [ping](#ping)
+5. [arp](#arp)
+6. [arping](#arping)
+7. [nslookup](#nslookup)
+8. [dig](#dig)
+9. [host](#host)
 
 ## ip
 
