@@ -237,16 +237,68 @@ Vegeu el següent video explicatiu:
 
 [![asciicast](https://asciinema.org/a/LUwQjircOYfzvjVC4JUYaeamg.svg)](https://asciinema.org/a/LUwQjircOYfzvjVC4JUYaeamg)
 
-## arp mostra la taula ARP del vostre host
--d ip (elimina l'entrada d'aquella ip a la taula ARP)
--s ip mac (afegeix una entrada a la taula ARP)
--a ip (mostra l'entrada a la taula ARP que correspon a la IP)
-Comentar manera de detectar Man in the middle
+## arp
 
-mostra tràfic arp o icmp:
-tcpdump -ennqti eth0 \( arp or icmp \)
+| Element | Valor |
+| -------- | -------- |
+| Sistema operatiu | GNU/Linux - Windows     |
+| Definició | Serveix per consultar i gestionar la taula ARP del nostre equip.  |
 
-detecta adreces IP duplicades:
+### Explicació ordre
+
+La taula arp ens permet treballar amb la taula ARP. La taula ARP és un registre que té l'ordinador per emmagatzemar l'equivalència entre IP (configuració lògica) i les MAC (configuració física) que usan per comunicar-se en les xarxes locals.
+Ja que quan es comunica per xarxa, sempre ho fa localment i s'usa adreces MAC. Si ha de fer connexió a l'exterior, es comuncia localment per la MAC de la porta d'enllaç. Aquest és el comportament del protocol [ARP](https://ca.wikipedia.org/wiki/ARP).
+![](https://i.imgur.com/VS16skB.png)
+
+
+### Consultar la taula
+
+Es fa amb l'ordre **arp** o posant el paràmetre **-a**
+
+```bash=
+profe@estany:~/smx1m5/smxm5/uf3/a01$ arp
+Address                  HWtype  HWaddress           Flags Mask            Iface
+_gateway                 ether   84:cf:bf:8b:9c:1c   C                     wlp0s20f3
+profe@estany:~/smx1m5/smxm5/uf3/a01$ arp -a
+_gateway (192.168.43.1) at 84:cf:bf:8b:9c:1c [ether] on wlp0s20f3
+
+```
+### Gestionar la taula
+
+Hi ha els següents paràmetres:
+
+- -s ip mac (afegeix una entrada estàtica a la taula ARP)
+```bash=
+profe@estany:~/smx1m5/smxm5/uf3/a01$ arp -s 192.167.0.1 84:cf:bf:8b:9c:11
+SIOCSARP: L’operació no és permesa
+profe@estany:~/smx1m5/smxm5/uf3/a01$ sudo arp -s 192.168.43.11 84:cf:bf:8b:9c:11
+```
+
+Fixeu-vos que la primera falla perquè la ip no és de la mateixa xarxa local.
+```bash=
+profe@estany:~/smx1m5/smxm5/uf3/a01$ ip addr show wlp0s20f3
+3: wlp0s20f3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 30:24:32:b7:24:15 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.43.57/24 brd 192.168.43.255 scope global dynamic noprefixroute wlp0s20f3
+       valid_lft 2405sec preferred_lft 2405sec
+    inet6 fe80::2e31:e74f:fccd:288d/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+```
+- -d ip (elimina una entrada d'aquella ip a la taula ARP)
+```bash=
+profe@estany:~/smx1m5/smxm5/uf3/a01$ sudo arp -d 192.168.43.11
+```
+
+### Curiositat
+
+Hi ha un mètode clàssic d'espionatge a xarxa que és el *[Man in the middle](https://ca.wikipedia.org/wiki/Intercepci%C3%B3)* hi ha un equip que es fa passar per la gateway (normalment el router), espia i després ho reenvia al router veritable. Una manera d'evitar-ho és afegint una entra estàtica a la taula ARP on es posa la ip de la porta d'enllaç (*gateway*) i la MAC d'aquesta. Ja que la falsa porta d'enllaç es posa la mateixa IP que el router però no pot posar-se la MAC:
+
+
+Vegeu el següent video explicatiu:
+
+[![asciicast](https://asciinema.org/a/pNk37nWXdTmKkDtA68hGRO6di.svg)](https://asciinema.org/a/pNk37nWXdTmKkDtA68hGRO6di)
+
+
 ## arping -D -I eth0 192.168.99.147; echo $?
 
 arping permet trobar ip duplicades.
