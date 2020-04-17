@@ -323,7 +323,62 @@ arp -D -I eth0 192.168.99.147; echo $?
 ```
 
 ## nslookup 
+
+| Element | Valor |
+| -------- | -------- |
+| Sistema operatiu | GNU/Linux - Windows   |
+| Definició | Permet fer consultes DNS i així comprovar si ens funciona bé la resolució de noms|
+
+### Ús
+
+Es posa el nom de la comanda i seguit la URL que volem comprovar o bé només la comanda i podrem anar comprovant diferents URL. 
+
+Per tant comprovem:
+- que tenim bé el protocol TCP/IP
+- que accedim a xarxes externes (per tant ben configurada la gateway)
+- que tenim ben configurat el servidor de DNS
+
+I també sabem la IP que correspon a una URL i quin servidor DNS usem.
+
+```bash=
+profe@estany:~/smx1m5/smxm5/uf3/a01$ nslookup www.google.com
+Server:		127.0.0.53
+Address:	127.0.0.53#53
+
+Non-authoritative answer:
+Name:	www.google.com
+Address: 216.58.201.164
+Name:	www.google.com
+Address: 2a00:1450:4003:802::2004
+profe@estany:~/smx1m5/smxm5/uf3/a01$ nslookup
+> www.google.com
+Server:		127.0.0.53
+Address:	127.0.0.53#53
+
+Non-authoritative answer:
+Name:	www.google.com
+Address: 216.58.201.164
+Name:	www.google.com
+Address: 2a00:1450:4003:802::2004
+> www.elperiodico.cat
+Server:		127.0.0.53
+Address:	127.0.0.53#53
+
+Non-authoritative answer:
+www.elperiodico.cat	canonical name = secure.grupozeta.es.edgekey.net.
+secure.grupozeta.es.edgekey.net	canonical name = e12551.f.akamaiedge.net.
+Name:	e12551.f.akamaiedge.net
+Address: 104.83.44.94
+
+```
+En aquest cas veiem que elperiodico.cat té la ip 104.83.44.94 i el servidor DNS que usem és el prpi ordinador el 127.0.0.53.
+
 ## dig (permeten verificar si funciona el DNS i quin servidor usem)
+
+
 ## host (permet saber la IP donat un nom)
+
+Vegeu en aquest video les diverses ordres per comprovar DNS que tenim:
+[![asciicast](https://asciinema.org/a/pNk37nWXdTmKkDtA68hGRO6di.svg)](https://asciinema.org/a/pNk37nWXdTmKkDtA68hGRO6di)
 
 
