@@ -415,9 +415,19 @@ Per tant ens permet:
 
 | Element | Valor |
 | -------- | -------- |
-| Sistema operatiu | GNU/Linux - Windows   |
-| Definició | Permet fer consultes DNS i així comprovar si ens funciona bé la resolució de noms|
+| Sistema operatiu | GNU/Linux   |
+| Definició | Permet conèixer quina ip té un nom lògic (un domini)|
 
+### Exemple ús
+
+Es posa el domini (nom lògic d'una màquina) darrera la comanda i ens respon amb la seva ip v4 i v6.
+
+```bash=
+profe@estany:~/smx1m5/smxm5/uf3/a01$ host www.google.com
+www.google.com has address 216.58.201.164
+www.google.com has IPv6 address 2a00:1450:4003:809::2004
+```
+En aquest cas no ens indica quin server DNS fem servir.
 
 Vegeu en aquest video les diverses ordres per comprovar DNS que tenim:
 [![asciicast](https://asciinema.org/a/pNk37nWXdTmKkDtA68hGRO6di.svg)](https://asciinema.org/a/pNk37nWXdTmKkDtA68hGRO6di)
