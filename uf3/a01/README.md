@@ -193,5 +193,65 @@ S'ha d'especificar quina interfície li correspon. És el nom posat a l'adaptado
 
 Més informació a [https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig)
 
+## ping
+
+| Element | Valor |
+| -------- | -------- |
+| Sistema operatiu | GNU/Linux - Windows     |
+| Definició | Serveix per comprovar la connectivitat d'un equip enviant missatges a altres dispositius     |
+
+## Exemple ordre
+
+EL ping envia un paquet de dades per la xarxa a un altre dispositiu. Així ens permet saber si la nostra configuració TCP/IP és correcte i al del destí. Utilitza el protocol [ICMP](https://ca.wikipedia.org/wiki/Internet_Control_Message_Protocol).
+
+L'ordre és:
+
+```bash=
+ping ipDestí
+ping nomLogic
+```
+
+El destí pot ser una ip (8.8.8.8) o un nom lògic (excemple www.insjoandaustria.org)
+
+## Paràmetres més interessants
+
+- -t (només per a Windows) eternament i s'acaba  prement **ctr+c**. En GNU/Linux per defecte és etern.
+- -c número de solicituts . Per enviar un nombre concret de missatges.
+- -I interfície que s'usa. Si tenim wifi i cablejat decidir per quina enviem el missatge.
+- -i interval (*delay*) entre peticions expressat en segons.
+- -s mida del paquet (bytes). Per defecte són 64 bytes i el màxim són 65507 bytes. Ens permetrà conèixer millor el rendiment d'una xarxa en situacions d'estress amb volum de dades alt.
+
+Hi ha un explicació sobre com saturar una xarxa amb pings fent el [Ping de la mort](https://es.wikipedia.org/wiki/Ping_de_la_muerte) però la majoria de servidors ja ho tenen previst, i per *Firewall* ho controlen o fins i tot hi ha servidors que no permeten rebre ping.  Vegeu en el video demostració que el servidor DNS de Google el 8.8.8.8 no permet rebre pings amb paquet de dades gran.
+
+## Principals usos
+
+El ping és de les comandes més usades per comprovar la bona instal·lació i configuració d'una xarxa. Principalment per:
+
+- per saber si la targeta xarxa interna funciona (es fa ping a la pròpia targeta de xarxa, IP de la xarxa 127.0.0.0 /8)
+- per saber si la targeta de xarxa té ben configurat el protocol TCP/Ip (ping sobre la pròpia IP que té la tarja)
+- per saber si hi ha connectivitat en la xarxa local.
+- per saber si hi ha connectivitat a xarxes externes i de fet saber si la gateway està ben configurada.
+- per saber si es resolen bé els noms. Comprovant la configuració DNS (realitzant un ping per nom i no ip)
+
+Vegeu el següent video explicatiu:
+
+[![asciicast](https://asciinema.org/a/LUwQjircOYfzvjVC4JUYaeamg.svg)](https://asciinema.org/a/LUwQjircOYfzvjVC4JUYaeamg)
+
+## arp mostra la taula ARP del vostre host
+-d ip (elimina l'entrada d'aquella ip a la taula ARP)
+-s ip mac (afegeix una entrada a la taula ARP)
+-a ip (mostra l'entrada a la taula ARP que correspon a la IP)
+Comentar manera de detectar Man in the middle
+
+mostra tràfic arp o icmp:
+tcpdump -ennqti eth0 \( arp or icmp \)
+
+detecta adreces IP duplicades:
+## arping -D -I eth0 192.168.99.147; echo $?
+
+arping permet trobar ip duplicades.
+## nslookup 
+## dig (permeten verificar si funciona el DNS i quin servidor usem)
+## host (permet saber la IP donat un nom)
 
 
