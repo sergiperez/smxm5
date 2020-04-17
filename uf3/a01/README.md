@@ -220,6 +220,7 @@ El destí pot ser una ip (8.8.8.8) o un nom lògic (excemple www.insjoandaustria
 - -I interfície que s'usa. Si tenim wifi i cablejat decidir per quina enviem el missatge.
 - -i interval (*delay*) entre peticions expressat en segons.
 - -s mida del paquet (bytes). Per defecte són 64 bytes i el màxim són 65507 bytes. Ens permetrà conèixer millor el rendiment d'una xarxa en situacions d'estress amb volum de dades alt.
+- -b per fer el ping de broadcast.
 
 Hi ha un explicació sobre com saturar una xarxa amb pings fent el [Ping de la mort](https://es.wikipedia.org/wiki/Ping_de_la_muerte) però la majoria de servidors ja ho tenen previst, i per *Firewall* ho controlen o fins i tot hi ha servidors que no permeten rebre ping.  Vegeu en el video demostració que el servidor DNS de Google el 8.8.8.8 no permet rebre pings amb paquet de dades gran.
 
@@ -299,9 +300,28 @@ Vegeu el següent video explicatiu:
 [![asciicast](https://asciinema.org/a/pNk37nWXdTmKkDtA68hGRO6di.svg)](https://asciinema.org/a/pNk37nWXdTmKkDtA68hGRO6di)
 
 
-## arping -D -I eth0 192.168.99.147; echo $?
+## arping 
 
-arping permet trobar ip duplicades.
+| Element | Valor |
+| -------- | -------- |
+| Sistema operatiu | GNU/Linux   |
+| Definició | Permet descobrir la mac d'una ip xarxa. Permete detectar duplicats |
+
+### Exemples 
+
+Per conèixer la MAC quan li fem ping:
+```bash=
+profe@estany:~/smx1m5/smxm5/uf3/a01$ arping 192.168.43.1 -I wlp0s20f3
+ARPING 192.168.43.1 from 192.168.43.57 wlp0s20f3
+Unicast reply from 192.168.43.1 [84:CF:BF:8B:9C:1C]  5.100ms
+```
+
+El més habitual és l'ús d'aquesta ordre per detectar ip's duplicades. Vegeu en l'ordre següent com es descobreix si en una xarxa local hi ha IP's duplicades.
+
+```bash=
+arp -D -I eth0 192.168.99.147; echo $?
+```
+
 ## nslookup 
 ## dig (permeten verificar si funciona el DNS i quin servidor usem)
 ## host (permet saber la IP donat un nom)
