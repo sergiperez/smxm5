@@ -373,7 +373,7 @@ Address: 104.83.44.94
 ```
 En aquest cas veiem que elperiodico.cat té la ip 104.83.44.94 i el servidor DNS que usem és el prpi ordinador el 127.0.0.53.
 
-## dig (permeten verificar si funciona el DNS i quin servidor usem)
+## dig 
 
 | Element | Valor |
 | -------- | -------- |
@@ -411,7 +411,7 @@ Per tant ens permet:
 - saber quina IP té una URL.
 - saber quina és la IP del meu servidor de DNS.
 
-## host (permet saber la IP donat un nom)
+## host 
 
 | Element | Valor |
 | -------- | -------- |
