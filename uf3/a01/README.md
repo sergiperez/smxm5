@@ -430,6 +430,6 @@ www.google.com has IPv6 address 2a00:1450:4003:809::2004
 En aquest cas no ens indica quin server DNS fem servir.
 
 Vegeu en aquest video les diverses ordres per comprovar DNS que tenim:
-[![asciicast](https://asciinema.org/a/pNk37nWXdTmKkDtA68hGRO6di.svg)](https://asciinema.org/a/pNk37nWXdTmKkDtA68hGRO6di)
+[![asciicast](https://asciinema.org/a/eupqiafayPlJBhzjDOcAKodn4.svg)](https://asciinema.org/a/eupqiafayPlJBhzjDOcAKodn4)
 
 
