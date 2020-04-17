@@ -375,8 +375,49 @@ En aquest cas veiem que elperiodico.cat té la ip 104.83.44.94 i el servidor DNS
 
 ## dig (permeten verificar si funciona el DNS i quin servidor usem)
 
+| Element | Valor |
+| -------- | -------- |
+| Sistema operatiu | GNU/Linux |
+| Definició | Permet fer consultar quina configuració té el servidor DNS que allotja un domini|
+
+### Ús
+
+Aquí podem veure quina definició té l'entrada DNS que respon per al domnini www.google.com .
+```bash=
+profe@estany:~$ dig www.google.com
+
+; <<>> DiG 9.11.3-1ubuntu1.11-Ubuntu <<>> www.google.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 61389
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;www.google.com.			IN	A
+
+;; ANSWER SECTION:
+www.google.com.		124	IN	A	216.58.211.36
+
+;; Query time: 0 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+;; WHEN: Fri Apr 17 09:58:04 CEST 2020
+;; MSG SIZE  rcvd: 59
+```
+En aquest cas veiem com està definit el registre en el DNS del domini www.google.com i veiem al final quin servidor he usat per fer la consulta, o sigui quin servidro DNS tinc (a partir de la línia ;; Query time: 0 msec). 
+
+Per tant ens permet:
+- saber quina IP té una URL.
+- saber quina és la IP del meu servidor de DNS.
 
 ## host (permet saber la IP donat un nom)
+
+| Element | Valor |
+| -------- | -------- |
+| Sistema operatiu | GNU/Linux - Windows   |
+| Definició | Permet fer consultes DNS i així comprovar si ens funciona bé la resolució de noms|
+
 
 Vegeu en aquest video les diverses ordres per comprovar DNS que tenim:
 [![asciicast](https://asciinema.org/a/pNk37nWXdTmKkDtA68hGRO6di.svg)](https://asciinema.org/a/pNk37nWXdTmKkDtA68hGRO6di)
