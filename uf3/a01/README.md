@@ -141,6 +141,57 @@ Vegeu el seu ús:
 
 [![asciicast](https://asciinema.org/a/K7a9wW8HwfAypuT8ZSt0LllFS.svg)](https://asciinema.org/a/K7a9wW8HwfAypuT8ZSt0LllFS)
 
-Vegeu més explicació a [https://www.tecmint.com/ifconfig-command-examples/] (https://www.tecmint.com/ifconfig-command-examples/)
+Vegeu més explicació a [https://www.tecmint.com/ifconfig-command-examples/](https://www.tecmint.com/ifconfig-command-examples/)
+
+## ipconfig
+
+| Element | Valor |
+| -------- | -------- |
+| Sistema operatiu | Windows     |
+| Definició | Serveix per comprovar i renovar l'adreça ip d'una targeta de xarxa d'un ordinador     |
+
+### Consultar la configuració TCP/IP
+
+Per visualitzar la configuració bàsica de totes les interfícies:
+
+```bash=
+ipconfig 
+```
+
+Per visualitzar tota la configuració de totes les interfícies:
+```bash=
+ipconfig /all
+```
+
+Per comprovar la informació DNS (les traduccions per nom lògic a IP) de la nostra interfície:
+```bash=
+ipconfig /displaydns Adaptador
+```
+
+S'ha d'especificar quina interfície li correspon. És el nom posat a l'adaptador.
+
+### Renovar configuracions TCP/IP
+
+Per renovar la configuració TCP/IP que assigna un servidor DHCP:
+```bash=
+ipconfig /renew Adaptador
+```
+S'ha d'especificar quina interfície li correspon. És el nom posat a l'adaptador.
+
+Per renovar la configuració DNS (les traduccions per nom lògic a IP) rebuda pel servidor DHCP:
+```bash=
+ipconfig /registerdns Adaptador
+```
+S'ha d'especificar quina interfície li correspon. És el nom posat a l'adaptador.
+
+
+Per eliminar les peticions DNS (les traduccions per nom lògic a IP) que s'han fet durant la sessió:
+```bash=
+ipconfig /flushdns Adaptador
+```
+S'ha d'especificar quina interfície li correspon. És el nom posat a l'adaptador.
+
+Més informació a [https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig)
+
 
 
