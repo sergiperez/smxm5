@@ -10,6 +10,11 @@
 7. [nslookup](#nslookup)
 8. [dig](#dig)
 9. [host](#host)
+10. [traceroute](#traceroute)
+11. [netstat](#netstat)
+11. [ss](#ss)
+12. [route](#route)
+13. [ncat](#ncat)
 
 ## ip
 
@@ -432,4 +437,190 @@ En aquest cas no ens indica quin server DNS fem servir.
 Vegeu en aquest video les diverses ordres per comprovar DNS que tenim:
 [![asciicast](https://asciinema.org/a/eupqiafayPlJBhzjDOcAKodn4.svg)](https://asciinema.org/a/eupqiafayPlJBhzjDOcAKodn4)
 
+## traceroute
 
+| Element | Valor |
+| -------- | -------- |
+| Sistema operatiu | GNU/Linux - Windows (comanda tracert)  |
+| Definició | Permet conèixer el camí fins a un destí.|
+
+### Exemple d'ús
+
+Hem de ficar com a paràmetre el destí (ip o nom de domini).
+
+```bash=
+[08:30:57] juan ~ $ sudo traceroute www.google.com
+traceroute to www.google.com (172.217.17.4), 30 hops max, 60 byte packets
+ 1  www.adsl.vf (192.168.0.1)  8.657 ms  8.671 ms  8.672 ms
+ 2  * * *
+ 3  10.183.74.21 (10.183.74.21) <MPLS:L=213946,E=0,S=1,T=1>  8.625 ms  10.918 ms  10.925 ms
+ 4  * * *
+ 5  * * *
+ 6  * 172.29.1.109 (172.29.1.109)  14.021 ms *
+ 7  212.166.147.222 (212.166.147.222)  17.376 ms  17.924 ms 212.166.147.58 (212.166.147.58)  17.887 ms
+ 8  * 74.125.242.177 (74.125.242.177)  18.468 ms *
+ 9  108.170.253.241 (108.170.253.241)  20.241 ms 142.250.46.166 (142.250.46.166)  20.435 ms 74.125.253.197 (74.125.253.197)  16.089 ms
+10  mad07s09-in-f4.1e100.net (172.217.17.4)  14.814 ms 74.125.253.199 (74.125.253.199)  16.754 ms 108.170.253.231 (108.170.253.231)  20.327 ms
+```
+En aquest exemple vull veure el camí per arribar a www.google.com. El camí vol dir els routers per on passen els paquets des del meu router fins al destí. En aquest cas passem per 10 routers. 
+
+Quan en un salt veiem  \* \* \*  vol dir que no podem obtenir informació de la ip en aquell salt. Pot ser degut a la configuració del router en qüestió, per raons de seguretat.
+
+Més exemples en aquest vídeo:
+[![asciicast](https://asciinema.org/a/ZcERI8ql2sw4E3q9iiPSvyQqV.svg)](https://asciinema.org/a/ZcERI8ql2sw4E3q9iiPSvyQqV)
+
+## netstat
+
+| Element | Valor |
+| -------- | -------- |
+| Sistema operatiu | GNU/Linux - Windows |
+| Definició | Et dona el llistat de connexions de comunicació establertes des de la teva màquina|
+
+### Exemple d'ús
+
+Amb l'opció -t, veiem les connexions tcp establertes. Amb -u, les udp. Amb l'opció -a veiem totes les connexions independentment de l'estat, establerta o no. Si no volem que la comanda ens tradueixi la sortida en noms de domini ni descripció de ports, usem -n. Amb l'opció -l veiem els ports que tenim oberts i en espera a que algú es connecti per a ells.
+
+si vull veure els serveis tcp en escolta al meu ordinador:
+
+```bash=
+$ netstat -tln
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN     
+tcp6       0      0 :::22                   :::*                    LISTEN     
+tcp6       0      0 ::1:631                 :::*                    LISTEN     
+```
+
+tinc el servei ssh (port 22) i el d'impressió (port 631).
+
+si no m'enrecordo que el port 22 era ssh, li trec l'opció n:
+
+```bash=
+$ netstat -tl
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:ssh             0.0.0.0:*               LISTEN     
+tcp        0      0 localhost:ipp           0.0.0.0:*               LISTEN     
+tcp6       0      0 [::]:ssh                [::]:*                  LISTEN     
+tcp6       0      0 localhost:ipp           [::]:*                  LISTEN     
+```
+
+Per fer ús de *netstat* necessiteu instal·lar el paquet *net-tools*:
+[![asciicast](https://asciinema.org/a/zkNJtVFyNUEQOdHZjMEHQKgaY.svg)](https://asciinema.org/a/zkNJtVFyNUEQOdHZjMEHQKgaY)
+
+Aquí podeu veure un vídeo exemple de la comanda *netstat*
+[![asciicast](https://asciinema.org/a/2ccanHSPRer9n4Kkr0hrGsGrW.svg)](https://asciinema.org/a/2ccanHSPRer9n4Kkr0hrGsGrW)
+
+## ss
+
+| Element | Valor |
+| -------- | -------- |
+| Sistema operatiu | GNU/Linux|
+| Definició | Igual que netstat però més eficient.|
+
+### Exemple d'ús
+
+Ports tcp establerts:
+
+```bash=
+$ ss -tn
+```
+Estadística de ports
+
+```bash=
+$ ss -s
+Total: 1063
+TCP:   34 (estab 26, closed 4, orphaned 0, timewait 4)
+
+Transport Total     IP        IPv6
+RAW	  1         0         1        
+UDP	  7         5         2        
+TCP	  30        28        2        
+INET	  38        33        5        
+FRAG	  0         0         0        
+```
+## route
+
+| Element | Valor |
+| -------- | -------- |
+| Sistema operatiu | GNU/Linux - Windows |
+| Definició | Et diu el router que utilitza la teva màquina per arribar a una determinada xarxa.|
+
+El normal és que només vegis la ruta per arribar a internet (que és la xarxa 0.0.0.0) i el teu router (*gateway*).
+
+Si en la teva xarxa local tinguessis dos routers perque un et dona accés a internet i l'altre a una altra xarxa local privada, aleshores la comanda route et podria donar dos valors o rutes, una per arribar a internet (xarxa 0.0.0.0) que estaria acompanyada pel teu gateway i una altra per arribar a l'altra xarxa local.
+
+### Exemple d'ús
+
+
+```bash=
+$ sudo route -n
+[sudo] contrasenya per a juan: 
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         192.168.0.1     0.0.0.0         UG    600    0        0 wlp18s0
+169.254.0.0     0.0.0.0         255.255.0.0     U     1000   0        0 wlp18s0
+192.168.0.0     0.0.0.0         255.255.255.0   U     600    0        0 wlp18s0
+
+```
+
+Aquí trobem tres línees, que són tres rutes. La columna *Destination* es refereix a la xarxa destí i la columna *Gateway* es refereix a quin és el router a qui he d'enviar els paquets per arribar a la xarxa de destí en qüestió. Per exemple, per arribar a la xarxa 0.0.0.0 he d'enviar els paquets a la 192.168.0.1, que és el meu router. La xarxa 169.254.0.0 és una xarxa que en realitat no existeix i que, per tant, no hem de fer res per arribar-hi, per això a la columna *Gateway* hi ha un 0.0.0.0. Per últim, per arribar a la xarxa a la que ja estic, la 192.168.0.0, no he de fer res, per tant a la columna *Gateway* també posa 0.0.0.0.
+
+Aquí teniu el vídeo relacionat amb la comanda:
+
+[![asciicast](https://asciinema.org/a/SLppThEcvPBwqWOmYme0LdhaJ.svg)](https://asciinema.org/a/SLppThEcvPBwqWOmYme0LdhaJ)
+
+## ncat
+
+
+| Element | Valor |
+| -------- | -------- |
+| Sistema operatiu | GNU/Linux - Windows |
+| Definició | Permet llegir i escriure dades per la línia de comandes a través de connexions establertes amb altres màquines a la xarxa|
+
+### Modes de connexió
+
+* **Connet mode** tu et connectes a una altra màquina (ets client).
+* **Listen mode** tu esperes a que una altra màquina es connecti a tu (ets servidor).
+
+### Exemple d'ús
+
+Amb ncat vull que algú m'escrigui un missatge al meu terminal des d'una altra màquina. Suposem que la meva màquina té per ip la 192.168.0.12 i l'altra màquina es troba a la meva mateixa xarxa. 
+
+1. Obriré el port 3000 per a que es puguin connectar a mi:
+
+```bash=
+MaquinaJuan(juan) ~ $ ncat -l 3000
+```
+
+2. Remòtament, a la mateixa xarxa, el Sergi es connecta a mi pel port 3000, que és per on estic escoltant jo:
+```bash=
+MaquinaSergi(sergi) ~ $ ncat 192.168.0.12 3000
+```
+
+3. A partir d'ara, i en el mateix terminal, tot el que el Sergi escrigui abans de fer return es veurà en el meu terminal.
+
+[A veure si s'entèn amb aquest vídeo](https://drive.google.com/file/d/10MY_7h1t1kr89XVIl_q_RaIpgCS88l8r/view?usp=sharing)
+
+### Altres exemples. Transferències de fitxers
+
+ncat té multitud d'usos, i molts d'ells molt divertits. 
+
+Un dels altres usos pot ser el de la transferència de fitxers. La idea és la mateixa que en l'exemple anterior, però assegurant-se que el que reps de la màquina remota va a parar a un fitxer i, des de la màquina remota, no escric si no que fico com a entrada de dades el fitxer que vull enviar:
+
+1. Obriré el port 3000 per a que es puguin connectar a mi i tot el que rebi que vafi a parar al fitxer salida.txt:
+ 
+```bash=
+MaquinaJuan(juan) ~ $ ncat -l 3000 > salida.txt
+```
+
+2. Remòtament, a la mateixa xarxa, el Sergi es connecta a mi pel port 3000, que és per on estic escoltant jo i com a entrada de dades fica tot un fitxer:
+```bash=
+MaquinaSergi(sergi) ~ $ ncat 192.168.0.12 3000 < solucionExamen.txt
+```
+
+3. En el moment que el Sergi executa l'ordre, enviarà el fitxer solucionExamen.txt fins a la meva màquina i es guardarà en el fitxer salida.txt.
+
+### Instal·lació del paquet
+[![asciicast](https://asciinema.org/a/nS4Sc3wOzVB2lH2AoB1cmSQyn.svg)](https://asciinema.org/a/nS4Sc3wOzVB2lH2AoB1cmSQyn)
