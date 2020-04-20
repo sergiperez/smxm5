@@ -15,6 +15,7 @@
 11. [ss](#ss)
 12. [route](#route)
 13. [ncat](#ncat)
+14. [nmap](#map)
 
 ## ip
 
@@ -573,7 +574,6 @@ Aquí teniu el vídeo relacionat amb la comanda:
 
 ## ncat
 
-
 | Element | Valor |
 | -------- | -------- |
 | Sistema operatiu | GNU/Linux - Windows |
@@ -624,3 +624,146 @@ MaquinaSergi(sergi) ~ $ ncat 192.168.0.12 3000 < solucionExamen.txt
 
 ### Instal·lació del paquet
 [![asciicast](https://asciinema.org/a/nS4Sc3wOzVB2lH2AoB1cmSQyn.svg)](https://asciinema.org/a/nS4Sc3wOzVB2lH2AoB1cmSQyn)
+
+## nmap
+
+| Element | Valor |
+| -------- | -------- |
+| Sistema operatiu | GNU/Linux - Windows |
+| Definició | Escaneja ports oberts de màquines remotes |
+
+### Instal·lació
+
+Ens podem baixar el paquet de la seva [web oficial](https://nmap.org/) on tindrem el paquet per GNU/Linux i per Windows. Si no, la podem trobar als repositoris de GNU/Linux. Per tant, executant:
+
+```bash=
+$ sudo apt update
+$ sudo apt install nmap
+```
+
+Tindrem instal·lada l'eina nmap. 
+
+### Descripció de l'eina
+
+És una eina molt potent que ens permet obtenir molta informació sobre servidors i màquines remotes. Es fa servir molt en seguretat a la xarxa.  Permet, per exemple:
+
+* Obtenir el llitat dels hosts que hi han en una xarxa. No només les seves ip, si no també ports oberts i sistemes operatius!!!
+* Veure els ports oberts d'una màquina remota. Saber quins ports oberts té una màquina (ports en escolta de peticions) és equivalent a saber quins serveis té!!! Per exemple, si té el port 80 obert o el port 443 obert, vol dir que aquella màquina té un servidor web.
+* Veure el software i la versió sobre un servei que té instal·lada una màquina remota. Per exemple, si té un Apache (servidor web) i quina versió. Informació molt útil perque permet saber aleshores si la màquina remota té algun forat de seguretat per culpa de la versió instal·lada d'alun servei. Normalment, si hi ha un software instal·lat amb una versió antiga, no actualitzada, pot tenir forats de seguretat i algun tipus d'atac a implementar contra aquella màquina.
+* Veure quin sistema operatiu i versió té la màquina remota!!!
+* ...
+
+### Exemples d'ús
+
+1. **Vull veure quins dispositius hi han a la meva xarxa**
+
+```bash=
+$ nmap 192.168.0.0/24
+Starting Nmap 7.70 ( https://nmap.org ) at 2020-04-20 11:53 CEST
+Nmap scan report for www.adsl.vf (192.168.0.1)
+Host is up (0.012s latency).
+Not shown: 990 closed ports
+PORT     STATE    SERVICE
+21/tcp   filtered ftp
+22/tcp   filtered ssh
+23/tcp   filtered telnet
+53/tcp   open     domain
+80/tcp   open     http
+443/tcp  open     https
+515/tcp  filtered printer
+631/tcp  filtered ipp
+990/tcp  filtered ftps
+9100/tcp filtered jetdirect
+
+Nmap scan report for 192.168.0.10
+Host is up (0.0074s latency).
+All 1000 scanned ports on 192.168.0.10 are closed
+
+Nmap scan report for 192.168.0.11
+Host is up (0.096s latency).
+All 1000 scanned ports on 192.168.0.11 are closed
+
+Nmap scan report for 192.168.0.12
+Host is up (0.000075s latency).
+Not shown: 999 closed ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+
+Nmap scan report for 192.168.0.251
+Host is up (0.0100s latency).
+Not shown: 996 filtered ports
+PORT     STATE  SERVICE
+443/tcp  open   https
+1503/tcp open   imtc-mcs
+2191/tcp open   tvbus
+9080/tcp closed glrpc
+```
+Obting 5 dispositius comptant el router, que és el primer que surt i que té com a ports oberts el 53 (servei DNS), el 80 i el 443 (http i https, respectivament).
+
+2. **Detecció de software de servei i sistema operatiu**
+
+Vaig a veure quin software fa servir el 192.168.0.12 pels seus ports oberts i quin sistema operatiu està fent servir:
+
+```bash=
+$ sudo nmap -A -T4 192.168.0.12
+Starting Nmap 7.70 ( https://nmap.org ) at 2020-04-20 12:10 CEST
+Nmap scan report for 192.168.0.12
+Host is up (0.000017s latency).
+Not shown: 999 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.9p1 Debian 10+deb10u1 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 f5:4b:9f:4d:c1:78:77:c0:1e:79:17:00:97:81:91:27 (RSA)
+|   256 0e:ef:9f:ce:ff:a8:38:8f:60:64:f8:e1:c3:21:a9:7b (ECDSA)
+|_  256 6f:5d:4e:f5:5c:22:04:25:51:24:fb:2c:db:2d:90:53 (ED25519)
+Device type: general purpose
+Running: Linux 3.X
+OS CPE: cpe:/o:linux:linux_kernel:3
+OS details: Linux 3.7 - 3.10
+Network Distance: 0 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+```
+
+L'opció *-A* és per a que em digui la versió de software i de sistema operatiu. Amb l'opció *-T4* la comanda anirà més ràpid. 
+
+La informació que em dona és que al port 22 (servei ssh per a que d'altres màquines es connectin remòtament) hi ha instal·lat el *Openssh* per Debian 10. O sigui que ja sé que la màquina 192.168.0.12 és un Debian versió 10 (*Buster*).
+
+3. **Si vull que em llisti només els hosts a la xarxa**
+
+Per aquest exemple farem servir l'opció -sP. Amb aquesta enviem paquets de tiups ICMP (ping) a tota la xarxa.
+
+
+```bash=
+$ nmap -sP 192.168.0.0/24
+Starting Nmap 7.70 ( https://nmap.org ) at 2020-04-20 12:25 CEST
+Nmap scan report for www.adsl.vf (192.168.0.1)
+Host is up (0.0051s latency).
+Nmap scan report for 192.168.0.10
+Host is up (0.0081s latency).
+Nmap scan report for 192.168.0.11
+Host is up (0.026s latency).
+Nmap scan report for 192.168.0.12
+Host is up (0.00012s latency).
+Nmap scan report for 192.168.0.251
+Host is up (0.027s latency).
+Nmap done: 256 IP addresses (5 hosts up) scanned in 16.21 seconds
+```
+
+4. **Vull veure el sistema operatiu**
+
+Faré servir l'opció -O. Per fer-la servir he d'acompanyar la comanda amb *sudo*. Escollo la ip 192.168.0.10 que no tenia cap port obert.
+
+```bash=
+$ sudo nmap -O 192.168.0.10
+Starting Nmap 7.70 ( https://nmap.org ) at 2020-04-20 12:33 CEST
+Nmap scan report for 192.168.0.10
+Host is up (0.011s latency).
+All 1000 scanned ports on 192.168.0.10 are closed
+MAC Address: 48:DB:50:48:CE:77 (Huawei Technologies)
+Too many fingerprints match this host to give specific OS details
+Network Distance: 1 hop
+
+OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 24.26 seconds
+```
+Si veieu, es tracta d'un dispositiu mòbil (*Huawei Technologies*).
