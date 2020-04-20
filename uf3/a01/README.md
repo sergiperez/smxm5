@@ -10,7 +10,7 @@
 7. [nslookup](#nslookup)
 8. [dig](#dig)
 9. [host](#host)
-10. [traceroute](#traceroute)
+10. [traceroute / tracert](#traceroute)
 11. [netstat](#netstat)
 11. [ss](#ss)
 12. [route](#route)
@@ -437,7 +437,7 @@ En aquest cas no ens indica quin server DNS fem servir.
 Vegeu en aquest video les diverses ordres per comprovar DNS que tenim:
 [![asciicast](https://asciinema.org/a/eupqiafayPlJBhzjDOcAKodn4.svg)](https://asciinema.org/a/eupqiafayPlJBhzjDOcAKodn4)
 
-## traceroute
+## traceroute / tracert
 
 | Element | Valor |
 | -------- | -------- |
