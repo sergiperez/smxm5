@@ -15,7 +15,7 @@
 11. [ss](#ss)
 12. [route](#route)
 13. [ncat](#ncat)
-14. [nmap](#map)
+14. [nmap](#nmap)
 
 ## ip
 
