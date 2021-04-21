@@ -27,7 +27,7 @@
 
 ### Comprovació de connexió
 
-Per comprovar quina adreça de xarxa ho podem fer amb les següents comandes:  
+Per comprovar quina és l'adreça de xarxa ho podem fer amb les següents comandes:  
 
 ```bash=
 profe@estany:~$ ip a
@@ -54,9 +54,9 @@ profe@estany:~$ sudo ip addr add 192.168.0.11/24 dev enp7s0
 ``` 
 En aquest cas afegim l'adreça 192.168.0.11/24 a la interfície cablejada enp7s0.
 
-Si volem eliminar una adreça ip d'un itnerfícies es fa amb la següent ordre:
+Si volem eliminar una adreça ip d'una interfície es fa amb la següent ordre:
 ```bash=
-profe@estany:~$ sudo ip addr add 192.168.0.11/24 dev enp7s0
+profe@estany:~$ sudo ip addr del 192.168.0.11/24 dev enp7s0
 ``` 
 
 **S'ha de fer amb permisos de sudo**
